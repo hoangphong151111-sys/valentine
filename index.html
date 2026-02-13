@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Valentine ❤️</title>
 
 <style>
@@ -16,28 +17,27 @@ body{
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    padding:20px;
+    box-sizing:border-box;
 }
 
-/* chữ chúc */
-h1{
-    color:white;
-    margin-bottom:5px;
-}
-p{
-    color:white;
-}
+/* chữ */
+h1{color:white;margin-bottom:5px;}
+p{color:white;margin-bottom:15px;}
 
-/* ảnh giữa màn hình */
+/* ===== ẢNH FULL MÀN HÌNH MOBILE ===== */
 #photo{
-    max-width:260px;
-    border-radius:20px;
-    box-shadow:0 0 25px rgba(255,255,255,0.7);
+    width:90vw;
+    height:65vh;
+    object-fit:cover;
+    border-radius:25px;
+    box-shadow:0 0 35px rgba(255,255,255,0.8);
     transition:all 0.8s ease;
 }
 
 /* nút trái tim */
 #next{
-    font-size:48px;
+    font-size:50px;
     cursor:pointer;
     margin-top:15px;
     animation:beat 1s infinite;
@@ -49,11 +49,10 @@ p{
     100%{transform:scale(1);}
 }
 
-/* tim rơi */
-.heart{
+/* ===== HOA/TIM RƠI ===== */
+.flower{
     position:fixed;
-    top:-20px;
-    color:#ff4d6d;
+    top:-30px;
     font-size:22px;
     animation:fall linear forwards;
 }
@@ -69,7 +68,7 @@ p{
 
 <body>
 
-<h1>Happy Valentine❤️</h1>
+<h1>Happy Valentine ❤️</h1>
 <p>Cảm ơn em vì đã đến bên anh 💕</p>
 
 <!-- NHẠC -->
@@ -83,7 +82,7 @@ p{
 
 <script>
 
-/* ===== DANH SÁCH 10 ẢNH ===== */
+/* ===== 10 ẢNH ===== */
 const images=[
 "anh1.jpg",
 "anh2.jpg",
@@ -106,32 +105,34 @@ document.getElementById("next").onclick=()=>{
     if(index>=images.length) index=0;
 
     photo.style.opacity=0;
-    photo.style.transform="scale(0.9)";
+    photo.style.transform="scale(0.95)";
 
     setTimeout(()=>{
         photo.src=images[index];
         photo.style.opacity=1;
         photo.style.transform="scale(1)";
-    },400);
+    },350);
 };
 
 /* ===== CLICK LẦN ĐẦU PHÁT NHẠC ===== */
 document.body.addEventListener("click",()=>{
     const music=document.getElementById("music");
-    music.volume=1;
     music.play().catch(()=>{});
 },{once:true});
 
-/* ===== TIM RƠI LIÊN TỤC ===== */
+/* ===== HOA/TIM RƠI LIÊN TỤC ===== */
+const icons=["❤️","🌸","💖","💕"];
+
 setInterval(()=>{
-    const heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.animationDuration=(3+Math.random()*3)+"s";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),6000);
-},300);
+    const f=document.createElement("div");
+    f.className="flower";
+    f.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+    f.style.left=Math.random()*100+"vw";
+    f.style.animationDuration=(4+Math.random()*3)+"s";
+    document.body.appendChild(f);
+
+    setTimeout(()=>f.remove(),7000);
+},250);
 
 </script>
 
