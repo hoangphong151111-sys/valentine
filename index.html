@@ -7,39 +7,39 @@
 <style>
 body{
     margin:0;
+    height:100vh;
     background:linear-gradient(135deg,#ff9a9e,#fad0c4);
     font-family:Arial;
     text-align:center;
     overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 }
 
 /* chữ chúc */
 h1{
     color:white;
-    margin-top:40px;
+    margin-bottom:5px;
+}
+p{
+    color:white;
 }
 
-/* khung ảnh giữa màn hình */
-#box{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:60vh;
-}
-
-/* ảnh */
-img{
+/* ảnh giữa màn hình */
+#photo{
     max-width:260px;
     border-radius:20px;
-    box-shadow:0 0 20px rgba(255,255,255,0.6);
-    transition:opacity 1s, transform 1s;
+    box-shadow:0 0 25px rgba(255,255,255,0.7);
+    transition:all 0.8s ease;
 }
 
 /* nút trái tim */
 #next{
-    font-size:45px;
+    font-size:48px;
     cursor:pointer;
-    margin-top:10px;
+    margin-top:15px;
     animation:beat 1s infinite;
 }
 
@@ -54,7 +54,7 @@ img{
     position:fixed;
     top:-20px;
     color:#ff4d6d;
-    font-size:20px;
+    font-size:22px;
     animation:fall linear forwards;
 }
 
@@ -69,23 +69,22 @@ img{
 
 <body>
 
-<h1>Chúc em một Valentine thật vui vẻ ❤️</h1>
-<p style="color:white;">Cảm ơn em đã đến bên anh 💕</p>
+<h1>Happy Valentine❤️</h1>
+<p>Cảm ơn em vì đã đến bên anh 💕</p>
 
 <!-- NHẠC -->
-<audio id="music" loop>
-   <source src="nhac1.mp3" type="audio/mpeg">
+<audio id="music" preload="auto" loop>
+   <source src="nhac.mp3" type="audio/mpeg">
 </audio>
 
-<div id="box">
-    <img id="photo" src="anh1.jpg">
-</div>
+<img id="photo" src="anh1.jpg">
 
 <div id="next">❤️</div>
 
 <script>
+
 /* ===== DANH SÁCH 10 ẢNH ===== */
-const images = [
+const images=[
 "anh1.jpg",
 "anh2.jpg",
 "anh3.jpg",
@@ -98,11 +97,11 @@ const images = [
 "anh10.jpg"
 ];
 
-let index = 0;
-const photo = document.getElementById("photo");
+let index=0;
+const photo=document.getElementById("photo");
 
 /* ===== CLICK TRÁI TIM ĐỔI ẢNH ===== */
-document.getElementById("next").onclick = ()=>{
+document.getElementById("next").onclick=()=>{
     index++;
     if(index>=images.length) index=0;
 
@@ -110,15 +109,17 @@ document.getElementById("next").onclick = ()=>{
     photo.style.transform="scale(0.9)";
 
     setTimeout(()=>{
-        photo.src = images[index];
+        photo.src=images[index];
         photo.style.opacity=1;
         photo.style.transform="scale(1)";
     },400);
 };
 
-/* ===== CLICK 1 CÁI LÀ PHÁT NHẠC ===== */
-document.body.addEventListener("click",function(){
-    document.getElementById("music").play().catch(()=>{});
+/* ===== CLICK LẦN ĐẦU PHÁT NHẠC ===== */
+document.body.addEventListener("click",()=>{
+    const music=document.getElementById("music");
+    music.volume=1;
+    music.play().catch(()=>{});
 },{once:true});
 
 /* ===== TIM RƠI LIÊN TỤC ===== */
@@ -129,7 +130,6 @@ setInterval(()=>{
     heart.style.left=Math.random()*100+"vw";
     heart.style.animationDuration=(3+Math.random()*3)+"s";
     document.body.appendChild(heart);
-
     setTimeout(()=>heart.remove(),6000);
 },300);
 
