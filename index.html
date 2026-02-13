@@ -1,41 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine ❤️</title>
+
+<style>
+body{
+  margin:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+}
+
+.container{
+  position:relative;
+  width:300px;
+  height:400px;
+}
+
+img{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:15px;
+  opacity:0;
+  transition:opacity 1s ease;
+}
+
+img.active{
+  opacity:1;
+}
+
+button{
+  position:absolute;
+  bottom:-60px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:pink;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+</style>
+</head>
+
 <body>
 
-<h1>Happy Valentine ❤️</h1>
-<p>Dành cho người anh yêu 💗</p>
+<div class="container">
 
-<!-- Nhạc nền -->
+  <!-- 🔥 10 ảnh của bạn -->
+  <img src="anh1.jpg" class="active">
+  <img src="anh2.jpg">
+  <img src="anh3.jpg">
+  <img src="anh4.jpg">
+  <img src="anh5.jpg">
+  <img src="anh6.jpg">
+  <img src="anh7.jpg">
+  <img src="anh8.jpg">
+  <img src="anh9.jpg">
+  <img src="anh10.jpg">
+
+  <button onclick="nextImage()">Bấm tiếp ❤️</button>
+</div>
+
 <audio id="music" loop>
   <source src="nhac.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 10 Ảnh -->
-<div> 
-  <img src="anh1.jpg" class="fade-img">
-  <img src="anh2.jpg" class="fade-img">
-  <img src="anh3.jpg" class="fade-img">
-  <img src="anh4.jpg" class="fade-img">
-  <img src="anh5.jpg" class="fade-img">
-  <img src="anh6.jpg" class="fade-img">
-  <img src="anh7.jpg" class="fade-img">
-  <img src="anh8.jpg" class="fade-img">
-  <img src="anh9.jpg" class="fade-img">
-  <img src="anh10.jpg" class="fade-img">
-</div>
-
 <script>
-// 👉 click vào màn hình là nhạc chạy
-document.body.addEventListener("click",()=>{
-  document.getElementById("music").play();
-});
+let index = 0;
+const images = document.querySelectorAll(".container img");
+const music = document.getElementById("music");
 
-// 👉 hiệu ứng 10 ảnh xuất hiện từ từ
-const images = document.querySelectorAll(".fade-img");
+function nextImage(){
+  music.play();
 
-images.forEach((img,index)=>{
-  setTimeout(()=>{
-    img.classList.add("show");
-  }, index * 1200); // mỗi ảnh cách nhau 1.2s
-});
+  images[index].classList.remove("active");
+  index = (index + 1) % images.length;
+  images[index].classList.add("active");
+}
 </script>
 
 </body>
+</html>
