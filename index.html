@@ -1,67 +1,41 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<title>Happy Valentine ❤️</title>
-
-<style>
-body{
-    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
-    text-align:center;
-    font-family: Arial;
-    overflow-x:hidden;
-}
-
-h1{
-    color:white;
-    margin-top:30px;
-}
-
-/* Ảnh fade-in */
-.fade-img{
-    width:220px;
-    margin:15px;
-    border-radius:20px;
-    box-shadow:0 0 15px #ff4d6d;
-    opacity:0;
-    transform: translateY(40px);
-    transition:1.5s;
-}
-
-.show{
-    opacity:1;
-    transform: translateY(0);
-}
-</style>
-</head>
-
 <body>
 
 <h1>Happy Valentine ❤️</h1>
-<p>Dành cho người anh yêu 💕</p>
+<p>Dành cho người anh yêu 💗</p>
 
 <!-- Nhạc nền -->
-<audio autoplay loop>
-    <source src="nhac.mp3" type="audio/mpeg">
+<audio id="music" loop>
+  <source src="nhac.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Ảnh -->
+<!-- 10 Ảnh -->
 <div>
-    <img src="anh1.jpg" class="fade-img">
-    <img src="anh2.jpg" class="fade-img">
-    <img src="anh3.jpg" class="fade-img">
+  <img src="anh1.jpg" class="fade-img">
+  <img src="anh2.jpg" class="fade-img">
+  <img src="anh3.jpg" class="fade-img">
+  <img src="anh4.jpg" class="fade-img">
+  <img src="anh5.jpg" class="fade-img">
+  <img src="anh6.jpg" class="fade-img">
+  <img src="anh7.jpg" class="fade-img">
+  <img src="anh8.jpg" class="fade-img">
+  <img src="anh9.jpg" class="fade-img">
+  <img src="anh10.jpg" class="fade-img">
 </div>
 
 <script>
-// hiệu ứng ảnh xuất hiện dần dần
+// 👉 click vào màn hình là nhạc chạy
+document.body.addEventListener("click",()=>{
+  document.getElementById("music").play();
+});
+
+// 👉 hiệu ứng 10 ảnh xuất hiện từ từ
 const images = document.querySelectorAll(".fade-img");
 
 images.forEach((img,index)=>{
-    setTimeout(()=>{
-        img.classList.add("show");
-    }, index * 1500); // mỗi ảnh cách nhau 1.5s
+  setTimeout(()=>{
+    img.classList.add("show");
+  }, index * 1200); // mỗi ảnh cách nhau 1.2s
 });
 </script>
 
 </body>
-</html>
