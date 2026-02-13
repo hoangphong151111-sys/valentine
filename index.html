@@ -3,19 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Valentine ❤️</title>
+<title>Valentine ❤️</title>
 
 <style>
 body{
   margin:0;
-  font-family:sans-serif;
   background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
+  font-family:sans-serif;
   overflow:hidden;
-  text-align:center;
   color:white;
 }
 
@@ -30,19 +29,15 @@ body{
   align-items:center;
 }
 
-/* ẩn gallery ban đầu */
 #galleryScreen{
   display:none;
 }
 
-/* khung ảnh căn giữa */
+/* khung ảnh */
 .container{
   position:relative;
   width:280px;
   height:380px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
 }
 
 .container img{
@@ -52,24 +47,38 @@ body{
   object-fit:cover;
   border-radius:15px;
   opacity:0;
-  transition:opacity 1s ease;
-  box-shadow:0 0 20px rgba(255,255,255,0.6);
+  transition:opacity 1s;
+  box-shadow:0 0 20px rgba(255,255,255,0.7);
 }
 
 .container img.active{
   opacity:1;
 }
 
-/* nút trái tim */
+/* trái tim nút */
 .heartBtn{
-  margin-top:25px;
   font-size:40px;
+  margin-top:20px;
   cursor:pointer;
-  user-select:none;
-  transition:transform .2s;
 }
-.heartBtn:active{
-  transform:scale(1.2);
+
+/* tim rơi */
+.heart{
+  position:absolute;
+  color:white;
+  font-size:20px;
+  animation:fall 5s linear forwards;
+}
+
+@keyframes fall{
+  from{
+    transform:translateY(-10vh);
+    opacity:1;
+  }
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
 }
 </style>
 </head>
@@ -80,10 +89,8 @@ body{
 <div id="introScreen" class="screen">
   <h1>
     Happy Valentine 💗<br><br>
-    Cảm ơn em vì đã đến bên anh,<br>
-    chúc chúng ta luôn bên nhau thật lâu ❤️
+    Cảm ơn em vì đã đến bên anh ❤️
   </h1>
-
   <div class="heartBtn" onclick="startLove()">❤️</div>
 </div>
 
@@ -106,30 +113,46 @@ body{
   <div class="heartBtn" onclick="nextImage()">❤️</div>
 </div>
 
-<!-- 🎵 NHẠC -->
 <audio id="music" loop>
   <source src="nhac.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-let index = 0;
-const images = document.querySelectorAll(".container img");
-const music = document.getElementById("music");
+let index=0;
+const images=document.querySelectorAll(".container img");
+const music=document.getElementById("music");
 
-// 👉 vào trang ảnh + phát nhạc
+/* 👉 vào trang ảnh + phát nhạc */
 function startLove(){
   document.getElementById("introScreen").style.display="none";
   document.getElementById("galleryScreen").style.display="flex";
   music.play().catch(()=>{});
 }
 
-// 👉 chuyển ảnh khi bấm trái tim
+/* 👉 đổi ảnh */
 function nextImage(){
   music.play().catch(()=>{});
   images[index].classList.remove("active");
-  index = (index + 1) % images.length;
+  index=(index+1)%images.length;
   images[index].classList.add("active");
 }
+
+/* 💗 tạo tim rơi quanh ảnh */
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="❤";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(15+Math.random()*20)+"px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),5000);
+}
+setInterval(createHeart,400);
+
+/* 🔊 đảm bảo chạm màn hình là chạy nhạc */
+document.body.addEventListener("touchstart",()=>{
+  music.play().catch(()=>{});
+});
 </script>
 
 </body>
