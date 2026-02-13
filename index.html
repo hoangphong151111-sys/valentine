@@ -1,22 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Valentine ❤️</title>
+<title>Happy Valentine ❤️</title>
+
 <style>
 body{
-    background:pink;
+    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
     text-align:center;
-    font-family:Arial;
+    font-family: Arial;
+    overflow-x:hidden;
 }
+
 h1{
-    color:red;
+    color:white;
+    margin-top:30px;
 }
-img{
-    width:200px;
+
+/* Ảnh fade-in */
+.fade-img{
+    width:220px;
+    margin:15px;
     border-radius:20px;
-    margin:10px;
-    box-shadow:0 0 10px #ff4d6d;
+    box-shadow:0 0 15px #ff4d6d;
+    opacity:0;
+    transform: translateY(40px);
+    transition:1.5s;
+}
+
+.show{
+    opacity:1;
+    transform: translateY(0);
 }
 </style>
 </head>
@@ -24,11 +38,30 @@ img{
 <body>
 
 <h1>Happy Valentine ❤️</h1>
-<p>Gửi người anh yêu nhất 💕</p>
+<p>Dành cho người anh yêu 💕</p>
 
-<img src="anh1.jpg">
-<img src="anh2.jpg">
-<img src="anh3.jpg">
+<!-- Nhạc nền -->
+<audio autoplay loop>
+    <source src="nhac.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Ảnh -->
+<div>
+    <img src="anh1.jpg" class="fade-img">
+    <img src="anh2.jpg" class="fade-img">
+    <img src="anh3.jpg" class="fade-img">
+</div>
+
+<script>
+// hiệu ứng ảnh xuất hiện dần dần
+const images = document.querySelectorAll(".fade-img");
+
+images.forEach((img,index)=>{
+    setTimeout(()=>{
+        img.classList.add("show");
+    }, index * 1500); // mỗi ảnh cách nhau 1.5s
+});
+</script>
 
 </body>
 </html>
