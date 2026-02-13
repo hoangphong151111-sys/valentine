@@ -30,16 +30,19 @@ body{
   align-items:center;
 }
 
-/* ẩn màn hình ảnh lúc đầu */
+/* ẩn gallery ban đầu */
 #galleryScreen{
   display:none;
 }
 
+/* khung ảnh căn giữa */
 .container{
   position:relative;
   width:280px;
   height:380px;
-  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 .container img{
@@ -50,26 +53,30 @@ body{
   border-radius:15px;
   opacity:0;
   transition:opacity 1s ease;
+  box-shadow:0 0 20px rgba(255,255,255,0.6);
 }
 
 .container img.active{
   opacity:1;
 }
 
-button{
-  padding:12px 20px;
-  border:none;
-  border-radius:25px;
-  background:#ff4d6d;
-  color:white;
-  font-size:16px;
+/* nút trái tim */
+.heartBtn{
+  margin-top:25px;
+  font-size:40px;
+  cursor:pointer;
+  user-select:none;
+  transition:transform .2s;
+}
+.heartBtn:active{
+  transform:scale(1.2);
 }
 </style>
 </head>
 
 <body>
 
-<!-- 💌 TRANG ĐẦU -->
+<!-- 💌 TRANG CHÚC -->
 <div id="introScreen" class="screen">
   <h1>
     Happy Valentine 💗<br><br>
@@ -77,7 +84,7 @@ button{
     chúc chúng ta luôn bên nhau thật lâu ❤️
   </h1>
 
-  <button onclick="startLove()">Bấm vào đây nha ❤️</button>
+  <div class="heartBtn" onclick="startLove()">❤️</div>
 </div>
 
 <!-- 🖼️ TRANG ẢNH -->
@@ -96,7 +103,7 @@ button{
     <img src="anh10.jpg">
   </div>
 
-  <button onclick="nextImage()">Bấm tiếp ❤️</button>
+  <div class="heartBtn" onclick="nextImage()">❤️</div>
 </div>
 
 <!-- 🎵 NHẠC -->
@@ -109,17 +116,16 @@ let index = 0;
 const images = document.querySelectorAll(".container img");
 const music = document.getElementById("music");
 
-// 👉 bấm trang đầu -> hiện ảnh + phát nhạc
+// 👉 vào trang ảnh + phát nhạc
 function startLove(){
   document.getElementById("introScreen").style.display="none";
   document.getElementById("galleryScreen").style.display="flex";
-
-  // phát nhạc (do user click nên không bị chặn)
   music.play().catch(()=>{});
 }
 
-// 👉 chuyển ảnh
+// 👉 chuyển ảnh khi bấm trái tim
 function nextImage(){
+  music.play().catch(()=>{});
   images[index].classList.remove("active");
   index = (index + 1) % images.length;
   images[index].classList.add("active");
